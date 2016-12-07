@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=prompt
+comment0.target=java.lang.String\ getString(java.lang.String)
+comment0.text=\r\n\ accepts\ string\ from\ user\r\n\ @param\ string\ accepted\ form\ the\ user\r\n
+comment1.params=prompt
+comment1.target=java.lang.Double\ getDouble(java.lang.String)
+comment1.text=\r\n\ accepts\ double\ from\ user\r\n\ @param\ double\ accepted\ form\ the\ user\r\n
+comment2.params=prompt
+comment2.target=java.lang.Integer\ getInteger(java.lang.String)
+comment2.text=\r\n\ accepts\ integer\ from\ user\r\n\ @param\ integer\ accepted\ form\ the\ user\r\n
+comment3.params=toPrint
+comment3.target=void\ println(java.lang.String)
+comment3.text=\r\n\ Displays\ the\ string\ specified\r\n\ \r\n
+comment4.params=
+comment4.target=java.lang.Integer\ getInteger()
+comment4.text=\r\n\ accepts\ Integer\ from\ user\r\n\ @param\ integer\ accepted\ form\ the\ user\r\n
+comment5.params=toPrint
+comment5.target=void\ print(java.lang.String)
+comment5.text=\r\n\ Displays\ the\ string\ specified\r\n\ \r\n
+numComments=6

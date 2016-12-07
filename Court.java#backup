@@ -1,0 +1,265 @@
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+/** 
+ * Abstract class for sports representing courts of the sports club.
+ * 
+ * @author Richard Camilleri
+ * @since 13-04-2015
+ */
+public abstract class Court
+{
+    // instance variables
+    protected int courtId;
+    protected int maxBookingTime;
+    protected double usageFee;
+    protected double insuranceFee;
+    protected double affiliationFee;
+    protected ArrayList<Booking> courtBookings;
+    public final static LocalTime TIMEOPEN = LocalTime.parse("08:00",DateTimeFormatter.ofPattern("HH:mm"));
+    public final static LocalTime TIMECLOSE = LocalTime.parse("23:00",DateTimeFormatter.ofPattern("HH:mm"));
+    
+    // Constructors
+    /**
+     * Constructor for objects of class Court
+     * 
+     * @param   courtId             courtid of court
+     * @param   aUsageFee           fee for court usage
+     * @param   anInsuranceFee      fee for insurance
+     * @param   anAffiliationFee    fee for affiliation
+     */
+    public Court(int aCourtId)
+    {
+        courtId = aCourtId;
+    }
+
+    /**
+     * Constructor for objects of class Court.
+     */
+    public Court(int aCourtId, double aUsageFee, double anInsuranceFee, double anAffiliationFee)
+    {
+        courtId = aCourtId;
+        usageFee = aUsageFee;
+        insuranceFee = anInsuranceFee;
+        affiliationFee = anAffiliationFee;
+        courtBookings = new ArrayList<Booking>();
+    }
+
+    // Getters
+    /**
+     * Gets court id
+     * 
+     * @return  court id number
+     */
+    public int getCourtId() {
+        return courtId;
+    }
+    
+     /**
+     * Gets maxBookingTime of court
+     * 
+     * @return  max allowable booking time of court
+     */
+    public int getMaxBookingTime() {
+        return maxBookingTime;
+    }
+    
+     /**
+     * Gets usage fee of court
+     * 
+     * @return  usage fee for court
+     */
+    public double getUsageFee() {
+        return usageFee;
+    }
+    
+    /**
+     * Gets insurance fee of court
+     * 
+     * @return  insurance fee for court
+     */
+    public double getInsuranceFee() {
+        return insuranceFee;
+    }
+        
+    /**
+     * Gets affiliation fee of court
+     * 
+     * @return  affiliation fee for court
+     */
+    public double getAffiliationFee() {
+        return affiliationFee;
+    }   
+    
+    /**
+     * gets booking in Court collection
+     * 
+     * @param   index       index of booking in collection
+     * @return      booking; 
+     */
+    public Booking getBooking (int index) {
+        if (courtBookings == null || (index <= 0 || index > (courtBookings.size() - 1))) {
+            // pass error to UI; no bookings collection, or bad index
+            return null;             
+        } else {
+            return courtBookings.get(index);
+        }  
+    } 
+    
+    // Other Methods
+    /**
+     * Adds a booking to the collection CourtBookings
+     * 
+     * @param   booking       booking object to add
+     */
+    public void addBooking (Booking booking) {
+        courtBookings.add(booking);
+    } 
+    
+    /**
+     * Removes booking in court collection
+     * 
+     * @param   index       index of booking in collection
+     * @return              returns false if error, else true
+     */
+    public boolean removeBooking(int bookingId) {
+        int index = findBooking(bookingId);
+        if (index == -1) {
+            // call some method passing errorMsg, bookingId not found for court
+            return false;
+        } else {
+            courtBookings.remove(index);
+            return true;
+        }
+    }
+    
+     /**
+     * Finds index of matching booking in Court collection
+     * 
+     * @param   bookingId       id of booking to find
+     * @return                  index of booking in collection, -1 if not found
+     */
+    public int findBooking (int bookingId) {
+        if (courtBookings == null) {
+            // pass error to UI; no bookings collection
+            return -1;             
+        } else {
+            for(int i=0; i < courtBookings.size(); i++) {
+                if (bookingId == courtBookings.get(i).getBookingId()) {
+                    return i;
+                } 
+            }
+            return -1;
+        }  
+    }
+    
+     /**
+     *  Calls Booking constructor to construct booking,
+     *  calls checkAvailable() to check dates and times,
+     *  adds booking to booking member collection and court collection
+     * 
+     * @param   bookingId       booking ID of current booking  
+     * @param   bookingDate     date of booking
+     * @param   startTime       start time of booking
+     * @param   endTime         end time of booking
+     * @param   member          booked for this member
+     * @param   court           booked for this court
+     * @param   sport           booked for this sport
+     * @return                  returns false if unsuccesful, else succesful
+     */    
+    public boolean makeBooking(int bookingId,
+                               LocalDate bookingDate,
+                               LocalTime startTime,
+                               LocalTime endTime,
+                               Member member,
+                               Court court,
+                               String sport) {                        
+        Booking booking = new Booking(bookingId,
+                                      bookingDate,
+                                      startTime,
+                                      endTime,
+                                      member,
+                                      court);
+        // check available, add if true                              
+        if (checkAvailable(booking)) {
+            addBooking(booking);
+            member.addBooking(booking);
+            return true;
+        } else {
+           // call some method passing errorMsg, not available 
+           return false;
+        }
+    }
+    
+     /**
+     * For a booking, check's duration not more than maximum, 
+     * within opening times, and court available for given date and times.
+     * 
+     * @param  booking  Booking to check
+     * @return          returns true if successful, else false
+     */
+    public boolean checkAvailable(Booking booking) {
+        // perform date availability checks. This is really a validation check
+        // as the brief, under "Member Bookings 3." and "Show Court Bookings: indicates that Receptionist 
+        // checks what is available, and enters in details as required
+        LocalDate date = booking.getBookingDate();
+        LocalTime sTime = booking.getStartTime();
+        LocalTime eTime = booking.getEndTime();
+
+        if (sTime.plusMinutes(booking.getCourtBooked().getMaxBookingTime()).isAfter(eTime)) {
+           // call some method passing errorMsg, outside duration  
+           return false;
+        } else if (eTime.isBefore(sTime)) {
+           // call some method passing errorMsg, end time before start time   
+           return false;
+        } else if (sTime.isBefore(TIMEOPEN)) {
+            // call some method passing errorMsg, start time before opening
+            return false;
+        } else if (eTime.isAfter(TIMECLOSE)) {
+            // call some method passing errorMsg, end time after closing
+            return false;
+        }
+        // check time is not already booked
+        for (int i=0; i< courtBookings.size(); i++) {
+            if (date.equals(courtBookings.get(i).getBookingDate()) &&
+                (sTime.isAfter(courtBookings.get(i).getStartTime()) || sTime.equals(courtBookings.get(i).getStartTime())) &&
+                (eTime.isBefore(courtBookings.get(i).getEndTime()) || eTime.equals(courtBookings.get(i).getEndTime()))) {
+                    // call some method passing errorMsg, time unavailable (already booked)
+                    return false;
+            }
+                    
+        }
+        return true;
+    }
+    
+    /**
+     * outputs details of court. Currently this just calls toString. 
+     * a better method would format correctly
+     *  
+     * @return  details of court, including bookings
+     */
+    public String displayBookings() {
+       String str = toString();
+       return str;
+    }
+
+    /**
+     * outputs details of court
+     *  
+     * @return  details of court
+     */
+    public String toString()
+    {
+        String str = "Court ID: " + String.valueOf(courtId) + 
+                               ", max booking time: " + maxBookingTime + 
+                               ", usage fee: " + usageFee +
+                               ", insurance fee: " + insuranceFee +
+                               ", affiliation fee: " + affiliationFee + "\r\n" +
+                               "BOOKINGS" + "\r\n" + courtBookings;
+        System.out.println(str);
+        return str;
+    }  
+
+}

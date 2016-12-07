@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=msg
+comment0.target=FileReadException(java.lang.String)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ FileReadException\r\n
+numComments=1

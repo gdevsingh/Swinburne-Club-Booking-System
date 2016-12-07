@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=courtId
+comment0.target=Court(int)
+comment0.text=\r\n\ Defines\ courtid\ for\ the\ Courtobject\r\n\ \r\n
+comment1.params=
+comment1.target=int\ getCourtId()
+comment1.text=\r\n\ Retrieves\ courtId\ for\ a\ court\ object\ \ \r\n\ @returns\ courtId\r\n
+comment2.params=aBooking
+comment2.target=void\ addBooking(Booking)
+comment2.text=\r\n\ Adds\ booking\ object\ to\ the\ court\r\n
+comment3.params=
+comment3.target=java.util.ArrayList\ getBookings()
+comment3.text=\r\n\ retrieves\ all\ booking\ objects\ for\ a\ court\r\n\ @returns\ collection\ of\ booking\ objects\r\n
+comment4.params=
+comment4.target=void\ sortingBookings()
+comment4.text=\r\n\ sorts\ bookings\ in\ ascending\ order\ as\ per\ the\ date\r\n
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment5.text=\r\n\ Returns\ courtId\ for\ the\ court\r\n\ @returns\ court\ object\r\n
+numComments=6

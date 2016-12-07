@@ -1,0 +1,8 @@
+// this is a comment, ignore
+//memberid,name,isfinancial,sports
+123,Anne,true,Tennis
+202,Fred,true
+313,Siew Lim,true,Tennis,Squash
+414,Ryan,true,Squash
+515,David Bayley,false
+888,Matthew,running

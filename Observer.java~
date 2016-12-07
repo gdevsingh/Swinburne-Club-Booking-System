@@ -1,0 +1,9 @@
+/**
+ * makes a class act as an observer to observable
+ */
+
+public interface Observer
+{
+   
+    void update();
+}

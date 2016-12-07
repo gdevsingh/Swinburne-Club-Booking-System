@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=FileUtility()
+comment1.params=fileName\ data
+comment1.target=void\ writeToFile(java.lang.String,\ java.util.ArrayList)
+comment1.text=\r\n\ writes\ data\ to\ a\ file\r\n\ \r\n\ @param\ fileName\ name\ of\ the\ file\ to\ store\ data\ to\ \r\n\ @param\ data\ the\ actual\ spot\ data\ to\ write\ to\ the\ file\r\n\ @throws\ IOException\r\n
+comment2.params=fileName
+comment2.target=java.util.ArrayList\ readFromFile(java.lang.String)
+comment2.text=\r\n\ reads\ data\ from\ the\ file\ specified\r\n\ \r\n\ @param\ fileName\ name\ of\ the\ file\ to\ retreive\ data\ from\ \r\n\ @returns\ an\ arraylist\ of\ type\ sting\ containing\ the\ data\ retrieved\ from\ the\ file\ \r\n
+comment3.params=fileName
+comment3.target=void\ clearFile(java.lang.String)
+comment3.text=\r\n\ Clears\ the\ contents\ of\ the\ file\ specified\r\n\ @param\ fileName\ name\ of\ the\ file\ to\ be\ cleared\r\n
+comment4.params=errorMessage
+comment4.target=void\ errorLogger(java.lang.String)
+comment4.text=\r\n\ Logs\ Errors\ to\ file\r\n\ @param\ fileName\ name\ of\ the\ file\ to\ be\ cleared\r\n
+numComments=5

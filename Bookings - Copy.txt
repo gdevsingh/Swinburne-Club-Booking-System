@@ -1,0 +1,5 @@
+//Swinburne Sports Booking System
+//Booking Date,Duration(mins),Booked by,Booked for
+2016-10-10T18:00,50,123,1112
+2016-10-20T11:00,45,313,1112
+2016-10-21T08:00,60,313,10
